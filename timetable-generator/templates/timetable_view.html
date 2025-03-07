@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Timetable View</h2>
+
+<div class="mb-3">
+    <select id="view-type" class="form-select">
+        <option value="master">Master Timetable</option>
+        <option value="teacher">Teacher View</option>
+        <option value="room">Room View</option>
+    </select>
+</div>
+
+<div id="entity-select" class="mb-3 d-none">
+    <select id="entity" class="form-select"></select>
+</div>
+
+<div class="mb-3">
+    <button id="export-pdf" class="btn btn-secondary me-2">Export as PDF</button>
+    <button id="export-csv" class="btn btn-secondary">Export as CSV</button>
+</div>
+
+<div id="timetable-container" class="table-responsive">
+    <!-- Timetable will be dynamically generated here -->
+</div>
+{% endblock %}
+

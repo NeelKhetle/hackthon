@@ -1,0 +1,20 @@
+flask_timetable_generator/
+├── app.py
+├── static/
+│   ├── css/
+│   │   └── styles.css
+│   └── js/
+│       └── main.js
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── input_forms.html
+│   ├── batch_input.html
+│   └── timetable_view.html
+├── models/
+│   └── timetable.py
+├── utils/
+│   ├── genetic_algorithm.py
+│   └── pdf_generator.py
+└── requirements.txt
+

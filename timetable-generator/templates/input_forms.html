@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Input Forms</h2>
+
+<ul class="nav nav-tabs" id="inputTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="subjects-tab" data-bs-toggle="tab" data-bs-target="#subjects" type="button" role="tab" aria-controls="subjects" aria-selected="true">Subjects</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="teachers-tab" data-bs-toggle="tab" data-bs-target="#teachers" type="button" role="tab" aria-controls="teachers" aria-selected="false">Teachers</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="rooms-tab" data-bs-toggle="tab" data-bs-target="#rooms" type="button" role="tab" aria-controls="rooms" aria-selected="false">Rooms</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="timeslots-tab" data-bs-toggle="tab" data-bs-target="#timeslots" type="button" role="tab" aria-controls="timeslots" aria-selected="false">Time Slots</button>
+    </li>
+</ul>
+
+<div class="tab-content mt-3" id="inputTabsContent">
+    <div class="tab-pane fade show active" id="subjects" role="tabpanel" aria-labelledby="subjects-tab">
+        <form id="subject-form">
+            <div class="mb-3">
+                <label for="subject-code" class="form-label">Subject Code</label>
+                <input type="text" class="form-control" id="subject-code" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject-name" class="form-label">Subject Name</label>
+                <input type="text" class="form-control" id="subject-name" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject-department" class="form-label">Department</label>
+                <input type="text" class="form-control" id="subject-department" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject-credits" class="form-label">Credits</label>
+                <input type="number" class="form-control" id="subject-credits" min="1" max="6" value="3" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject-sessions" class="form-label">Required Sessions per Week</label>
+                <input type="number" class="form-control" id="subject-sessions" min="1" max="10" value="2" required>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="subject-has-practical">
+                <label class="form-check-label" for="subject-has-practical">Has Practical/Lab Component</label>
+            </div>
+            <div id="practical-details" class="d-none">
+                <div class="mb-3">
+                    <label for="practical-duration" class="form-label">Practical Duration (hours)</label>
+                    <input type="number" class="form-control" id="practical-duration" min="1" max="4" value="2">
+                </div>
+                <div class="mb-3">
+                    <label for="practical-sessions" class="form-label">Practical Sessions per Week</label>
+                    <input type="number" class="form-control" id="practical-sessions" min="1" max="3" value="1">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Subject</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="teachers" role="tabpanel" aria-labelledby="teachers-tab">
+        <form id="teacher-form">
+            <div class="mb-3">
+                <label for="teacher-id" class="form-label">Teacher ID</label>
+                <input type="text" class="form-control" id="teacher-id" required>
+            </div>
+            <div class="mb-3">
+                <label for="teacher-name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="teacher-name" required>
+            </div>
+            <div class="mb-3">
+                <label for="teacher-department" class="form-label">Department</label>
+                <input type="text" class="form-control" id="teacher-department" required>
+            </div>
+            <div class="mb-3">
+                <label for="teacher-max-hours" class="form-label">Max Hours Per Day</label>
+                <input type="number" class="form-control" id="teacher-max-hours" min="1" max="10" value="6" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Subjects Qualified to Teach</label>
+                <div id="teacher-subjects"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Teacher</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="rooms" role="tabpanel" aria-labelledby="rooms-tab">
+        <form id="room-form">
+            <div class="mb-3">
+                <label for="room-id" class="form-label">Room ID</label>
+                <input type="text" class="form-control" id="room-id" required>
+            </div>
+            <div class="mb-3">
+                <label for="room-name" class="form-label">Room Name</label>
+                <input type="text" class="form-control" id="room-name" required>
+            </div>
+            <div class="mb-3">
+                <label for="room-capacity" class="form-label">Capacity</label>
+                <input type="number" class="form-control" id="room-capacity" min="1" max="500" value="30" required>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="room-has-projector">
+                <label class="form-check-label" for="room-has-projector">Has Projector</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="room-has-computers">
+                <label class="form-check-label" for="room-has-computers">Has Computers</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="room-is-lab">
+                <label class="form-check-label" for="room-is-lab">Is Laboratory</label>
+            </div>
+            <div id="lab-details" class="mb-3 d-none">
+                <label for="lab-type" class="form-label">Laboratory Type</label>
+                <select class="form-select" id="lab-type">
+                    <option value="computer">Computer Lab</option>
+                    <option value="physics">Physics Lab</option>
+                    <option value="chemistry">Chemistry Lab</option>
+                    <option value="biology">Biology Lab</option>
+                    <option value="engineering">Engineering Lab</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Room</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="timeslots" role="tabpanel" aria-labelledby="timeslots-tab">
+        <form id="timeslot-form">
+            <div class="mb-3">
+                <label for="timeslot-day" class="form-label">Day</label>
+                <select class="form-select" id="timeslot-day" required>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="timeslot-start" class="form-label">Start Time</label>
+                <input type="time" class="form-control" id="timeslot-start" required>
+            </div>
+            <div class="mb-3">
+                <label for="timeslot-end" class="form-label">End Time</label>
+                <input type="time" class="form-control" id="timeslot-end" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Time Slot</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Batch Input</h2>
+
+<ul class="nav nav-tabs" id="batchInputTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="batch-subjects-tab" data-bs-toggle="tab" data-bs-target="#batch-subjects" type="button" role="tab" aria-controls="batch-subjects" aria-selected="true">Subjects</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="batch-teachers-tab" data-bs-toggle="tab" data-bs-target="#batch-teachers" type="button" role="tab" aria-controls="batch-teachers" aria-selected="false">Teachers</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="batch-rooms-tab" data-bs-toggle="tab" data-bs-target="#batch-rooms" type="button" role="tab" aria-controls="batch-rooms" aria-selected="false">Rooms</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="batch-timeslots-tab" data-bs-toggle="tab" data-bs-target="#batch-timeslots" type="button" role="tab" aria-controls="batch-timeslots" aria-selected="false">Time Slots</button>
+    </li>
+</ul>
+
+<div class="tab-content mt-3" id="batchInputTabsContent">
+    <div class="tab-pane fade show active" id="batch-subjects" role="tabpanel" aria-labelledby="batch-subjects-tab">
+        <p class="text-muted">Enter subjects in CSV format, one per line:</p>
+        <p class="text-muted"><code>code,name,department,credits,requiredSessions,hasPractical,practicalDuration,practicalSessionsPerWeek</code></p>
+        <p class="text-muted">Example: CS101,Introduction to Programming,Computer Science,3,2,true,2,1</p>
+        <div class="mb-3">
+            <label for="subjects-csv" class="form-label">Subjects CSV</label>
+            <textarea class="form-control" id="subjects-csv" rows="10"></textarea>
+        </div>
+        <button id="import-subjects" class="btn btn-primary">Import Subjects</button>
+    </div>
+    <div class="tab-pane fade" id="batch-teachers" role="tabpanel" aria-labelledby="batch-teachers-tab">
+        <p class="text-muted">Enter teachers in CSV format, one per line:</p>
+        <p class="text-muted"><code>id,name,department,maxHoursPerDay,subject1,subject2,...</code></p>
+        <p class="text-muted">Example: T001,Dr. John Smith,Computer Science,6,CS101,CS102</p>
+        <div class="mb-3">
+            <label for="teachers-csv" class="form-label">Teachers CSV</label>
+            <textarea class="form-control" id="teachers-csv" rows="10"></textarea>
+        </div>
+        <button id="import-teachers" class="btn btn-primary">Import Teachers</button>
+    </div>
+    <div class="tab-pane fade" id="batch-rooms" role="tabpanel" aria-labelledby="batch-rooms-tab">
+        <p class="text-muted">Enter rooms in CSV format, one per line:</p>
+        <p class="text-muted"><code>id,name,capacity,hasProjector,hasComputers,isLab,labType</code></p>
+        <p class="text-muted">Example: R101,Main Building Room 101,40,true,false,false,</p>
+        <div class="mb-3">
+            <label for="rooms-csv" class="form-label">Rooms CSV</label>
+            <textarea class="form-control" id="rooms-csv" rows="10"></textarea>
+        </div>
+        <button id="import-rooms" class="btn btn-primary">Import Rooms</button>
+    </div>
+    <div class="tab-pane fade" id="batch-timeslots" role="tabpanel" aria-labelledby="batch-timeslots-tab">
+        <p class="text-muted">Enter time slots in CSV format, one per line:</p>
+        <p class="text-muted"><code>day,startTime,endTime</code></p>
+        <p class="text-muted">Example: Monday,09:00,10:00</p>
+        <div class="mb-3">
+            <label for="timeslots-csv" class="form-label">Time Slots CSV</label>
+            <textarea class="form-control" id="timeslots-csv" rows="10"></textarea>
+        </div>
+        <button id="import-timeslots" class="btn btn-primary">Import Time Slots</button>
+    </div>
+</div>
+{% endblock %}
+
